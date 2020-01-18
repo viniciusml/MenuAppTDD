@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+extension UIScreen {
+    /// Returns fraction of UIScreen Width
+    func widthThirds(_ value: CGFloat) -> CGFloat {
+        return (self.bounds.width / 3) * value
+    }
+}
+
 /// Initializes an UIColor from Hex characters.
 public extension UIColor {
     convenience init(hex: String) {

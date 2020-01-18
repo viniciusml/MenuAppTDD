@@ -12,37 +12,34 @@ import UIKit
 extension UIColor {
     
     static let appRed = UIColor(hex: "F53B50")
+        
+    static let appDarkBlue = UIColor(hex: "313B52")
+    
+    static let appNavItemColor = UIColor(hex: "E3E1E1")
 }
 
 extension CGFloat {
     
     struct CellHeight {
         
-        static let category = 108
+        static let category: CGFloat = 108
         
-        static let menuCollapsed = 138
+        static let menuCollapsed: CGFloat = 138
         
-        static let menuExpanded = 428
+        static let menuExpanded: CGFloat = 428
         
-        static let shoppingCart = 143
+        static let shoppingCart: CGFloat = 143
     }
     
     struct CardHeight {
         
-        static let collapsed = 80
+        static let collapsed: CGFloat = 80
         
-        static let expanded = 375
+        static let expanded: CGFloat = UIScreen.main.bounds.height * 0.45
     }
 }
 
-extension UIFont {
-    private static func customFont(name: String, size: CGFloat) -> UIFont {
-        let font = UIFont(name: name, size: size)
-        assert(font != nil, "Can't load font: \(name)")
-        return font ?? UIFont.systemFont(ofSize: size)
-    }
+extension String {
     
-    static func mainFont(ofSize size: CGFloat) -> UIFont {
-        return customFont(name: "Ultra-Regular", size: size)
-    }
+    static let mainFont = "Ultra-Regular"
 }

@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -20,16 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-        
-        let navigationController = UINavigationController(rootViewController: CategoryViewController())
-        
-        // Set Navigation bar transparent
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
-        navigationController.navigationBar.isTranslucent = true
-
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()        
+        window?.rootViewController = UIHostingController(rootView: CategoryMainView())
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
