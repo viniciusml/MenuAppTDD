@@ -11,7 +11,7 @@ import UIKit
 
 extension UIScreen {
     /// Returns fraction of UIScreen Width
-    func widthThirds(_ value: CGFloat) -> CGFloat {
+    func whiteThirds(_ value: CGFloat) -> CGFloat {
         return (self.bounds.width / 3) * value
     }
 }

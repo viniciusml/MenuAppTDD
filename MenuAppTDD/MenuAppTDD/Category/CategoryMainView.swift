@@ -22,32 +22,16 @@ struct CategoryMainView: View {
         NavigationView {
             ZStack {
                 Color(.appRed)
-                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: UIScreen.main.widthThirds(2.0)))
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: UIScreen.main.whiteThirds(2.0)))
                     .edgesIgnoringSafeArea(.all)
                 Form {
-                    // Waiting for data to replace by ForEarch
-                    CategoryView()
-                        .listRowInsets(EdgeInsets(top: 0, leading: 30, bottom: 30, trailing: 30))
-                        .buttonStyle(PlainButtonStyle())
-                    CategoryView()
-                        .listRowInsets(EdgeInsets(top: 0, leading: 30, bottom: 30, trailing: 30))
-                    .buttonStyle(PlainButtonStyle())
-                    CategoryView()
-                        .listRowInsets(EdgeInsets(top: 0, leading: 30, bottom: 30, trailing: 30))
-                        .buttonStyle(PlainButtonStyle())
-                    CategoryView()
-                        .listRowInsets(EdgeInsets(top: 0, leading: 30, bottom: 30, trailing: 30))
-                        .buttonStyle(PlainButtonStyle())
-                    CategoryView()
-                        .listRowInsets(EdgeInsets(top: 0, leading: 30, bottom: 30, trailing: 30))
-                        .buttonStyle(PlainButtonStyle())
-                    CategoryView()
-                        .listRowInsets(EdgeInsets(top: 0, leading: 30, bottom: 30, trailing: 30))
-                        .buttonStyle(PlainButtonStyle())
-                    CategoryView()
-                        .listRowInsets(EdgeInsets(top: 0, leading: 30
-                            , bottom: 30, trailing: 30))
-                        .buttonStyle(PlainButtonStyle())
+                    ForEach(1...10, id: \.self) {_ in
+                        
+                      CategoryView()
+                      .listRowInsets(EdgeInsets(top: 0, leading: 30, bottom: 30, trailing: 30))
+
+                      .buttonStyle(PlainButtonStyle())
+                    }
                 }
                 .padding(.trailing)
                 .padding(.leading)
@@ -55,23 +39,10 @@ struct CategoryMainView: View {
                 .padding(.bottom)
                 .edgesIgnoringSafeArea(.all)
             }
-        .navigationBarItems(leading: NavigationItem("menu"), trailing: NavigationItem("basket"))
+            .navigationBarItems(
+                leading: NavigationItem("menu", color: .white),
+                trailing: NavigationItem("basket", color: .appNavItemColor))
         }
-    }
-}
-
-struct NavigationItem: View {
-    var image: String
-    
-    init(_ image: String) {
-        self.image = image
-    }
-    
-    var body: some View {
-        Image(image)
-            .resizable()
-            .frame(width: 30, height: 30)
-            .foregroundColor(Color(.appNavItemColor))
     }
 }
 
