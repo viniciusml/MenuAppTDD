@@ -17,7 +17,7 @@ class URLSessionHTTPClient {
     }
     
     func get(from url: URL) -> Result<[CategoryItem], Error> {
-        session.dataTask(with: url) { _, _, _ in }.resume()
+        _ = session.dataTaskPublisher(for: URLRequest(url: url))
         return .failure(NSError(domain: "Test", code: 1))
     }
 }
