@@ -12,7 +12,7 @@ import MenuAppTDD
 class URLSessionHTTPClient {
     private let session: URLSession
     
-    init(session: URLSession) {
+    init(session: URLSession = .shared) {
         self.session = session
     }
     
@@ -24,26 +24,14 @@ class URLSessionHTTPClient {
 
 class URLSessionHTTPClientTests: XCTestCase {
     
-    func test_getFromURL_resumesDataTaskWithURL() {
-        let url = URL(string: "http://any-url.com")!
-        let session = URLSessionSpy()
-        let task = URLSessionDataTaskSpy()
-        session.stub(url: url, task: task)
-        
-        let sut = URLSessionHTTPClient(session: session)
-        
-        _ = sut.get(from: url)
-        
-        XCTAssertEqual(task.resumeCallCount, 1)
-    }
-    
     func test_getFromURL_failsOnRequestError() {
-        let url = URL(string: "http://any-url.com")!
-        let session = URLSessionSpy()
-        let error = NSError(domain: "Test", code: 1)
-        session.stub(url: url, error: error)
+        URLProtocolStub.startInterceptingRequests()
         
-        let sut = URLSessionHTTPClient(session: session)
+        let url = URL(string: "http://any-url.com")!
+        let error = NSError(domain: "Test", code: 1)
+        URLProtocolStub.stub(url: url, error: error)
+        
+        let sut = URLSessionHTTPClient()
         
         let result = sut.get(from: url)
         switch result {
@@ -52,48 +40,53 @@ class URLSessionHTTPClientTests: XCTestCase {
         default:
             XCTFail("Expected failure with \(error), got \(result) instead")
         }
+        
+        URLProtocolStub.stopInterceptingRequests()
     }
     
     // MARK: - Helpers
     
-    private class URLSessionSpy: URLSession {
+    private class URLProtocolStub: URLProtocol {
         
-        private var stubs = [URL: Stub]()
+        private static var stubs = [URL: Stub]()
         
         private struct Stub {
-            let task: URLSessionTask
             let error: Error?
         }
+                
+        static func stub(url: URL, error: Error? = nil) {
+            stubs[url] = Stub(error: error)
+        }
         
-        override init() {}
+        static func startInterceptingRequests() {
+            URLProtocol.registerClass(URLProtocolStub.self)
+        }
         
-        override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-            guard let stub = stubs[url] else {
-                fatalError("Couldn't find stub for \(url)")
+        static func stopInterceptingRequests() {
+            URLProtocol.unregisterClass(URLProtocolStub.self)
+            stubs = [:]
+        }
+        
+        override class func canInit(with request: URLRequest) -> Bool {
+            guard let url = request.url else { return false }
+            
+            return URLProtocolStub.stubs[url] != nil
+        }
+        
+        override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+            return request
+        }
+        
+        override func startLoading() {
+            guard let url = request.url, let stub = URLProtocolStub.stubs[url] else { return }
+            
+            if let error = stub.error {
+                client?.urlProtocol(self, didFailWithError: error)
             }
-            completionHandler(nil, nil, stub.error)
-            return stub.task as! URLSessionDataTask
+            
+            client?.urlProtocolDidFinishLoading(self)
         }
         
-        func stub(url: URL, task: URLSessionDataTask = FakeURLSessionDataTask(), error: Error? = nil) {
-            stubs[url] = Stub(task: task, error: error)
-        }
-    }
-    
-    private class FakeURLSessionDataTask: URLSessionDataTask {
-        
-        override init() {}
-        
-        override func resume() {}
-    }
-    
-    private class URLSessionDataTaskSpy: URLSessionDataTask {
-        var resumeCallCount = 0
-        
-        override init() {}
-        
-        override func resume() {
-            resumeCallCount += 1
-        }
+        override func stopLoading() {}
     }
 }
