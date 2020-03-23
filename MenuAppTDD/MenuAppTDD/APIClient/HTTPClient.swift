@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol HTTPClient {
-    func get(from url: URL) -> Result<[Category], Error>
+    func get(from url: URL) -> Result<[CategoryItem], Error>
 }

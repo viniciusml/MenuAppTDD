@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Category: Codable {
+public struct CategoryItem: Codable {
     let categoryID: String
     let categoryName: String
 
