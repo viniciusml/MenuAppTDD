@@ -24,6 +24,10 @@ class URLSessionHTTPClient {
     }
 }
 
+//References:
+//  --: https://www.hackingwithswift.com/articles/153/how-to-test-ios-networking-code-the-easy-way
+//  --: https://nshipster.com/nsurlprotocol/
+
 class URLSessionHTTPClientTests: XCTestCase {
     
     override func setUp() {
@@ -80,6 +84,8 @@ class URLSessionHTTPClientTests: XCTestCase {
          return URL(string: "http://any-url.com")!
      }
     
+
+    // This class will allow us to pass Data, URLResponse, and Error, to simulate the behaviour of a network request.
     private class URLProtocolStub: URLProtocol {
         
         private static var stub: Stub?
@@ -109,6 +115,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             requestObserver = nil
         }
         
+        // determines whether this handler can handle a specific kind of request. We’ll always return true from this, which means we want to handle all requests.
         override class func canInit(with request: URLRequest) -> Bool {
             requestObserver?(request)
             return true
@@ -118,6 +125,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             return request
         }
         
+        // will be called when we need to do our loading, and this is where we’ll return some test data immediately.
         override func startLoading() {
             if let data = URLProtocolStub.stub?.data {
                 client?.urlProtocol(self, didLoad: data)
@@ -134,6 +142,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             client?.urlProtocolDidFinishLoading(self)
         }
         
+        // this method is required but doesn't need to do anything
         override func stopLoading() {}
     }
 }
