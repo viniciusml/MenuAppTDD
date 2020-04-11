@@ -19,7 +19,7 @@ class URLSessionHTTPClient {
     func get(from url: URL) -> Result<[CategoryItem], Error> {
         session.dataTask(with: url).resume()
         _ = session.dataTaskPublisher(for: url)
-    
+        
         return .failure(NSError(domain: "Test", code: 1))
     }
 }
@@ -39,28 +39,27 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_getFromURL_performsGETRequestWithURL() {
-         let url = URL(string: "http://any-url.com")!
-         let exp = expectation(description: "Wait for request")
-
-         URLProtocolStub.observeRequests { request in
-             XCTAssertEqual(request.url, url)
-             XCTAssertEqual(request.httpMethod, "GET")
-             exp.fulfill()
-         }
-
-         let _ = URLSessionHTTPClient().get(from: url)
-
-         wait(for: [exp], timeout: 1.0)
-     }
+        let url = URL(string: "http://any-url.com")!
+        let exp = expectation(description: "Wait for request")
+        
+        URLProtocolStub.observeRequests { request in
+            XCTAssertEqual(request.url, url)
+            XCTAssertEqual(request.httpMethod, "GET")
+            exp.fulfill()
+        }
+        
+        _ = makeSUT().get(from: url)
+        
+        wait(for: [exp], timeout: 1.0)
+    }
     
     func test_getFromURL_failsOnRequestError() {
         let url = URL(string: "http://any-url.com")!
         let error = NSError(domain: "Test", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
         
-        let sut = URLSessionHTTPClient()
+        let result = makeSUT().get(from: url)
         
-        let result = sut.get(from: url)
         switch result {
         case let .failure(receivedError as NSError):
             XCTAssertEqual(receivedError, error)
@@ -71,6 +70,10 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT() -> URLSessionHTTPClient {
+        return URLSessionHTTPClient()
+    }
     
     private class URLProtocolStub: URLProtocol {
         
@@ -84,9 +87,9 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         
         static func observeRequests(observer: @escaping (URLRequest) -> Void) {
-             requestObserver = observer
-         }
-                
+            requestObserver = observer
+        }
+        
         static func stub(data: Data?, response: URLResponse?, error: Error?) {
             stub = Stub(data: data, response: response, error: error)
         }
