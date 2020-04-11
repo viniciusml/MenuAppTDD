@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol DataTaskPublisher {
-    func get(from url: URL) -> Result<[CategoryItem], Error>
+    func createPublisher(from url: URL) -> URLSession.DataTaskPublisher
 }
