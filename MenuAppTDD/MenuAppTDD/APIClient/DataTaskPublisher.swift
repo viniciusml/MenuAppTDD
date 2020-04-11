@@ -1,5 +1,5 @@
 //
-//  HTTPClient.swift
+//  DataTaskPublisher.swift
 //  MenuAppTDD
 //
 //  Created by Vinicius Moreira Leal on 23/03/2020.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-public protocol HTTPClient {
+public protocol DataTaskPublisher {
     func get(from url: URL) -> Result<[CategoryItem], Error>
 }
