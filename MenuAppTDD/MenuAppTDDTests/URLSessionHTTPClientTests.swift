@@ -16,11 +16,8 @@ class URLSessionHTTPClient {
         self.session = session
     }
     
-    func get(from url: URL) -> Result<[CategoryItem], Error> {
-        session.dataTask(with: url).resume()
-        _ = session.dataTaskPublisher(for: url)
-        
-        return .failure(NSError(domain: "Test", code: 1))
+    func createPublisher(from url: URL) -> URLSession.DataTaskPublisher {
+        return session.dataTaskPublisher(for: url)
     }
 }
 
@@ -46,30 +43,15 @@ class URLSessionHTTPClientTests: XCTestCase {
         let url = anyURL()
         let exp = expectation(description: "Wait for request")
         
+        _ = makeSUT().createPublisher(from: url)
+        
         URLProtocolStub.observeRequests { request in
             XCTAssertEqual(request.url, url)
             XCTAssertEqual(request.httpMethod, "GET")
             exp.fulfill()
         }
         
-        _ = makeSUT().get(from: url)
-        
         wait(for: [exp], timeout: 1.0)
-    }
-    
-    func test_getFromURL_failsOnRequestError() {
-        let error = NSError(domain: "Test", code: 1)
-        URLProtocolStub.stub(data: nil, response: nil, error: error)
-        
-        let result = makeSUT().get(from: anyURL())
-        
-        switch result {
-        case let .failure(receivedError as NSError):
-            XCTAssertEqual(receivedError, error)
-        default:
-            XCTFail("Expected failure with \(error), got \(result) instead")
-        }
-        
     }
     
     // MARK: - Helpers
