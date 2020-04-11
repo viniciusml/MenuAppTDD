@@ -79,11 +79,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
-    
-    private func anyURL() -> URL {
-         return URL(string: "http://any-url.com")!
-     }
-    
 
     // This class will allow us to pass Data, URLResponse, and Error, to simulate the behaviour of a network request.
     private class URLProtocolStub: URLProtocol {
