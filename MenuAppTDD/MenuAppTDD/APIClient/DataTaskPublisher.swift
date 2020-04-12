@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol DataTaskPublisher {
-    func createPublisher(from url: URL) -> URLSession.DataTaskPublisher
+    func createPublisher(from request: URLRequest) -> URLSession.DataTaskPublisher
 }
