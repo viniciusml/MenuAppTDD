@@ -10,18 +10,6 @@ import XCTest
 import MenuAppTDD
 import Combine
 
-class URLSessionHTTPClient: DataTaskPublisher {
-    private let session: URLSession
-    
-    init(session: URLSession = .shared) {
-        self.session = session
-    }
-    
-    func createPublisher(from request: URLRequest) -> URLSession.DataTaskPublisher {
-        return session.dataTaskPublisher(for: request)
-    }
-}
-
 //References:
 //  --: https://www.hackingwithswift.com/articles/153/how-to-test-ios-networking-code-the-easy-way
 //  --: https://nshipster.com/nsurlprotocol/
