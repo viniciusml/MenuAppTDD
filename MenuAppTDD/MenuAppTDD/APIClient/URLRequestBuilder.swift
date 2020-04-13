@@ -9,10 +9,7 @@
 import Foundation
 
 public typealias Endpoint = String
-
-public protocol RequestBuilder {
-    func buildRequest(for endpoint: Endpoint) -> URLRequest
-}
+public typealias HTTPMethod = String
 
 struct URLRequestComponent {
     static let baseURL = "https://developers.zomato.com/api/v2.1"
@@ -25,7 +22,7 @@ struct URLRequestComponent {
     static let categoriesEndpoint: Endpoint = "/categories"
 }
 
-public struct URLRequestBuilder: RequestBuilder {
+public struct URLRequestBuilder {
     
     private let urlString: String
     private let headers: [String: String]
@@ -35,13 +32,14 @@ public struct URLRequestBuilder: RequestBuilder {
         self.headers = headers
     }
         
-    public func buildRequest(for endpoint: Endpoint) -> URLRequest {
+    public func buildRequest(for endpoint: Endpoint, method: HTTPMethod = "GET") -> URLRequest {
         guard let url = URL(string: urlString + endpoint ) else {
             fatalError("Invalid URL")
         }
 
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = headers
+        request.httpMethod = method
         return request
     }
 }

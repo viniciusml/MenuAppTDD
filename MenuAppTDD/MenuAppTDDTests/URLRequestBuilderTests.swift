@@ -32,7 +32,7 @@ class URLRequestBuilderTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(urlStr: String, headers: [String: String] = [:]) -> RequestBuilder {
+    private func makeSUT(urlStr: String, headers: [String: String] = [:]) -> URLRequestBuilder {
         return URLRequestBuilder(urlString: urlStr, headers: headers)
     }
     
