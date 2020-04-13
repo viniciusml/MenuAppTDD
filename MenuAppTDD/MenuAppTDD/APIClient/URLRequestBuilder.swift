@@ -11,7 +11,7 @@ import Foundation
 public typealias Endpoint = String
 public typealias HTTPMethod = String
 
-struct URLRequestComponent {
+struct URLRequestConstant {
     static let baseURL = "https://developers.zomato.com/api/v2.1"
     
     static let defaultHeaders: [String: String] = [
