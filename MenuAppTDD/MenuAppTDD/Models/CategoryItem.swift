@@ -8,12 +8,31 @@
 
 import Foundation
 
-public struct CategoryItem: Codable {
-    let categoryID: String
-    let categoryName: String
+// MARK: - Response
+public struct Response: Codable, Equatable {
+    let categories: [Category]
+    
+    public init(categories: [Category]) {
+        self.categories = categories
+    }
+}
 
-    public init(categoryID: String, categoryName: String) {
-        self.categoryID = categoryID
-        self.categoryName = categoryName
+// MARK: - Category
+public struct Category: Codable, Equatable {
+    let categories: Categories
+    
+    public init(categories: Categories) {
+        self.categories = categories
+    }
+}
+
+// MARK: - Categories
+public struct Categories: Codable, Equatable {
+    let id: Int
+    let name: String
+    
+    public init(id: Int, name: String) {
+        self.id = id
+        self.name = name
     }
 }

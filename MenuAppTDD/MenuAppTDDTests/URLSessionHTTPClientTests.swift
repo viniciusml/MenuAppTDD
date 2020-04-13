@@ -169,7 +169,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         return receivedValue
     }
     
-    private func publisherFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> URLSession.DataTaskPublisher {
+    private func publisherFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> URLRequestPublisher {
         URLProtocolStub.stub(data: data, response: response, error: error)
         let sut = makeSUT(file: file, line: line)
         
@@ -180,20 +180,8 @@ class URLSessionHTTPClientTests: XCTestCase {
         XCTAssertNotNil(sub, file: file, line: line)
     }
     
-    func anyURLRequest() -> URLRequest {
-        return URLRequest(url: URL(string: "http://any-url.com")!)
-    }
-
-    private func anyData() -> Data {
-        Data("any Data".utf8)
-    }
-    
     func anyNSError() -> NSError {
         NSError(domain: "NSURLErrorDomain", code: -1, userInfo: nil)
-    }
-
-    private func nonHTTPURLResponse() -> URLResponse {
-        URLResponse(url: anyURLRequest().url!, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
     }
     
     private func anyHTTPURLResponse() -> HTTPURLResponse {

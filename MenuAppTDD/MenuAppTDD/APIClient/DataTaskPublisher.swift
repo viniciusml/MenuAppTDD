@@ -7,7 +7,10 @@
 //
 
 import Foundation
+import Combine
+
+public typealias URLRequestPublisher = AnyPublisher<(data: Data, response: URLResponse), URLError>
 
 public protocol DataTaskPublisher {
-    func createPublisher(from request: URLRequest) -> URLSession.DataTaskPublisher
+    func createPublisher(from request: URLRequest) -> URLRequestPublisher
 }

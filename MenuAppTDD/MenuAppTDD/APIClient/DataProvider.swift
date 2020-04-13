@@ -25,102 +25,37 @@ import Combine
  6 - A publisher may optionally send completion with receive(completion). A completion can either be a normal termination, or may be a .failure completion, optionally propagating an error type.
  */
 
-
-enum APIFailureCondition: Error {
-    case invalidServerResponse
-}
-
-protocol APIDataTaskPublisher {
-    func dataTaskPublisher(for request: URLRequest) -> URLSession.DataTaskPublisher
-}
-
-class APISessionDataPublisher: APIDataTaskPublisher {
+public struct DataProvider {
     
-    func dataTaskPublisher(for request: URLRequest) -> URLSession.DataTaskPublisher {
-        return session.dataTaskPublisher(for: request)
+    public let request: URLRequest
+    public let client: DataTaskPublisher
+    
+    public enum NetworkError: Error {
+        case connectivity
+        case invalidHTTPStatusCode
+        case invalidData
     }
     
-    var session: URLSession
-    
-    init(session: URLSession = URLSession.shared) {
-        self.session = session
-    }
-}
-
-class Example {
-    func EXAMPLEgetData(_ url: URL) -> Future<Any, APIFailureCondition> {
-        let session = URLSession.shared
-        return Future { promise in
-            let task = session.dataTask(with: url) { data, response, error in
-                if error != nil {
-                    promise(.failure(.invalidServerResponse))
-                } else {
-                    if let data = data {
-                        promise(.success(data))
-                    }  else {
-                        let unknownError = APIFailureCondition.invalidServerResponse
-                        promise(.failure(unknownError))
-                    }
-                }
-            }
-            task.resume()
-        }
+    public init(request: URLRequest, client: DataTaskPublisher) {
+        self.request = request
+        self.client = client
     }
     
-    static let baseURL = "http://localhost:8080"
-    
-    static let defaultHeaders = [
-        "Content-Type": "application/json",
-        "cache-control": "no-cache",
-    ]
-    
-    static var publisher: APIDataTaskPublisher = APISessionDataPublisher()
-    
-    private static func buildGetTodoRequest(authToken: String) -> URLRequest {
-        
-        let headers = buildHeaders(key: "Authorization", value: "Bearer \(authToken)")
-        guard let url = URL(string: baseURL + "/todos" ) else {
-            fatalError("APIError.invalidEndpoint")
-        }
-        var request = URLRequest(url: url, timeoutInterval: timeoutInterval)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-        return request
-    }
-
-    internal static func getTodoDTP(authToken: String) -> URLSession.DataTaskPublisher {
-        let request = buildGetTodoRequest(authToken: authToken)
-        return publisher.dataTaskPublisher(for: request)
-    }
-    
-    internal static func buildHeaders(key: String, value: String) -> [String: String] {
-        var headers = defaultHeaders
-        headers[key] = value
-        return headers
-    }
-    
-    static var timeoutInterval: TimeInterval = 10.0
-    
-    static func AMAZINGEXAMPLEgetData(_ url: URL) -> AnyPublisher<[CategoryItem], Never> {
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { try validate($0.data, $0.response) }
-            .decode(type: [CategoryItem].self, decoder: JSONDecoder())
-            .replaceError(with: [CategoryItem(categoryID: "0", categoryName: "Error Category")])
+    public func load() -> AnyPublisher<Response, Error> {
+        return client.createPublisher(from: request)
+            .tryMap { try DataProvider.validate($0.data, $0.response) }
+            .decode(type: Response.self, decoder: JSONDecoder())
+            .mapError { ($0 as? NetworkError ?? NetworkError.invalidData) }
             .eraseToAnyPublisher()
     }
     
-    internal static func validate(_ data: Data, _ response: URLResponse) throws -> Data {
+    private static func validate(_ data: Data, _ response: URLResponse) throws -> Data {
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw APIFailureCondition.invalidServerResponse
+            throw NetworkError.connectivity
         }
         guard (200..<300).contains(httpResponse.statusCode) else {
-            throw APIFailureCondition.invalidServerResponse
+            throw NetworkError.invalidHTTPStatusCode
         }
         return data
     }
-}
-
-class DataProvider {
-    
-    
 }
