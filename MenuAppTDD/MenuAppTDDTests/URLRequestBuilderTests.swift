@@ -13,38 +13,30 @@ class URLRequestBuilderTests: XCTestCase {
     
     func test_buildRequest_usesCorrectEndpoint() {
         let endpoint: Endpoint = "/exampleEndpoint"
-        let sut = URLRequestBuilderStub()
+        let sut = makeSUT(urlStr: baseURL())
         
-        _ = sut.buildRequest(for: endpoint)
-        XCTAssertEqual(sut.endpoints, [endpoint])
+        let request = sut.buildRequest(for: endpoint)
+        
+        XCTAssertEqual(request.url?.path, endpoint)
     }
     
     func test_buildRequest_appendsEndpointToBaseURL() {
-        let baseURL = "https://base-url.com"
+        let url = baseURL()
         let endpoint: Endpoint = "/exampleEndpoint"
-        let sut = URLRequestBuilderStub()
+        let sut = makeSUT(urlStr: url)
         
         let request = sut.buildRequest(for: endpoint)
-        XCTAssertEqual(request.url?.absoluteString, baseURL + endpoint)
+        
+        XCTAssertEqual(request.url?.absoluteString, url + endpoint)
     }
     
     // MARK: - Helpers
     
-    private func makeSUT() -> RequestBuilder {
-        return URLRequestBuilderStub()
+    private func makeSUT(urlStr: String, headers: [String: String] = [:]) -> RequestBuilder {
+        return URLRequestBuilder(urlString: urlStr, headers: headers)
     }
     
-    private class URLRequestBuilderStub: RequestBuilder {
-        
-        var endpoints = [Endpoint]()
-        
-        private let baseURL = "https://base-url.com"
-        
-        func buildRequest(for endpoint: Endpoint) -> URLRequest {
-            endpoints.append(endpoint)
-            let url = URL(string: baseURL + endpoint)!
-            let request = URLRequest(url: url)
-            return request
-        }
+    private func baseURL() -> String {
+        return "https://base-url.com"
     }
 }
