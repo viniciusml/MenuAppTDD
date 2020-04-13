@@ -25,6 +25,10 @@ import Combine
  6 - A publisher may optionally send completion with receive(completion). A completion can either be a normal termination, or may be a .failure completion, optionally propagating an error type.
  */
 
+//References:
+//  --: https://www.hackingwithswift.com/articles/153/how-to-test-ios-networking-code-the-easy-way
+//  --: https://nshipster.com/nsurlprotocol/
+
 public struct DataProvider {
     
     public let request: URLRequest

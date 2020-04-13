@@ -10,10 +10,6 @@ import XCTest
 import MenuAppTDD
 import Combine
 
-//References:
-//  --: https://www.hackingwithswift.com/articles/153/how-to-test-ios-networking-code-the-easy-way
-//  --: https://nshipster.com/nsurlprotocol/
-
 class URLSessionHTTPClientTests: XCTestCase {
     
     override func setUp() {
