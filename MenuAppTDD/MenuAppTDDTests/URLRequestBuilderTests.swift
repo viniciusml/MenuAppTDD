@@ -32,11 +32,11 @@ class URLRequestBuilderTests: XCTestCase {
     
     func test_buildRequest_usesHeaders() {
         let headers = ["Test": "Header"]
-        let sut = makeSUT(urlStr: baseURL(), headers: headers)
+        let sut = makeSUT(urlStr: baseURL(), headers: defaultHeaders())
         
         let request = sut.buildRequest(for: exampleEndpoint())
         
-        XCTAssertEqual(request.allHTTPHeaderFields, ["Test": "Header"])
+        XCTAssertEqual(request.allHTTPHeaderFields, headers)
     }
     
     // MARK: - Helpers
@@ -51,5 +51,9 @@ class URLRequestBuilderTests: XCTestCase {
     
     private func exampleEndpoint() -> Endpoint {
         return "/exampleEndpoint"
+    }
+    
+    private func defaultHeaders() -> [String: String] {
+        return ["Test": "Header"]
     }
 }
