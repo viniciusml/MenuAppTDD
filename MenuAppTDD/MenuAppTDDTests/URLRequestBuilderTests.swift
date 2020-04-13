@@ -16,13 +16,23 @@ class URLRequestBuilderTests: XCTestCase {
         XCTAssertTrue(sut.endpoints.isEmpty)
     }
     
+    func test_buildRequest_usesCorrectEndpoint() {
+        let endpoint: Endpoint = "/exampleEndpoint"
+        let sut = URLRequestBuilderStub()
+        
+        _ = sut.buildRequestFor(endpoint)
+        XCTAssertEqual(sut.endpoints, [endpoint])
+    }
+    
+    // MARK: - Helpers
+    
     private class URLRequestBuilderStub: RequestBuilder {
         
         var endpoints = [Endpoint]()
         
         func buildRequestFor(_ endpoint: Endpoint) -> URLRequest {
             endpoints.append(endpoint)
-            return URLRequest(url: URL(string: "")!)
+            return URLRequest(url: URL(string: "http://any-url.com")!)
         }
     }
 }
