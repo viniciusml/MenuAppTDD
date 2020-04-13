@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct URLRequestBuilder {
+public typealias Endpoint = String
+
+public protocol RequestBuilder {
+    func buildRequestFor(_ endpoint: Endpoint) -> URLRequest
+}
+
+public struct URLRequestBuilder: RequestBuilder {
     
     private let baseURL = "https://developers.zomato.com/api/v2.1"
     
@@ -17,18 +23,13 @@ struct URLRequestBuilder {
         "user-key": "d25a516a7a59fb465b3b1440a2c92621"
     ]
     
-    typealias Endpoint = String
-    let endpoint: Endpoint
-    
-    init(endpoint: Endpoint) {
-        self.endpoint = endpoint
-    }
+    public init() {}
         
-    func buildRequest(_ endpoint: Endpoint = "/categories") -> URLRequest {
+    public func buildRequestFor(_ endpoint: Endpoint = "/categories") -> URLRequest {
         guard let url = URL(string: baseURL + endpoint ) else {
             fatalError("Invalid URL")
         }
-        
+
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = defaultHeaders
         return request
