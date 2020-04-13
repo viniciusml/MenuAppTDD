@@ -20,7 +20,7 @@ class URLRequestBuilderTests: XCTestCase {
         let endpoint: Endpoint = "/exampleEndpoint"
         let sut = URLRequestBuilderStub()
         
-        _ = sut.buildRequestFor(endpoint)
+        _ = sut.buildRequest(for: endpoint)
         XCTAssertEqual(sut.endpoints, [endpoint])
     }
     
@@ -29,7 +29,7 @@ class URLRequestBuilderTests: XCTestCase {
         let endpoint: Endpoint = "/exampleEndpoint"
         let sut = URLRequestBuilderStub()
         
-        let request = sut.buildRequestFor(endpoint)
+        let request = sut.buildRequest(for: endpoint)
         XCTAssertEqual(request.url?.absoluteString, baseURL + endpoint)
     }
     
@@ -41,7 +41,7 @@ class URLRequestBuilderTests: XCTestCase {
         
         private let baseURL = "https://base-url.com"
         
-        func buildRequestFor(_ endpoint: Endpoint) -> URLRequest {
+        func buildRequest(for endpoint: Endpoint) -> URLRequest {
             endpoints.append(endpoint)
             let url = URL(string: baseURL + endpoint)!
             let request = URLRequest(url: url)

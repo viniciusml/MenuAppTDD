@@ -11,7 +11,7 @@ import Foundation
 public typealias Endpoint = String
 
 public protocol RequestBuilder {
-    func buildRequestFor(_ endpoint: Endpoint) -> URLRequest
+    func buildRequest(for endpoint: Endpoint) -> URLRequest
 }
 
 public struct URLRequestBuilder: RequestBuilder {
@@ -25,7 +25,7 @@ public struct URLRequestBuilder: RequestBuilder {
     
     public init() {}
         
-    public func buildRequestFor(_ endpoint: Endpoint = "/categories") -> URLRequest {
+    public func buildRequest(for endpoint: Endpoint = "/categories") -> URLRequest {
         guard let url = URL(string: baseURL + endpoint ) else {
             fatalError("Invalid URL")
         }
