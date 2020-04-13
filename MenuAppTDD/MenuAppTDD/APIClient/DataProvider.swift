@@ -28,6 +28,10 @@ import Combine
 //References:
 //  --: https://www.hackingwithswift.com/articles/153/how-to-test-ios-networking-code-the-easy-way
 //  --: https://nshipster.com/nsurlprotocol/
+//  --: https://heckj.github.io/swiftui-notes/
+//  --: https://medium.com/@jllnmercier/swift-combine-in-depth-e7031aa6298f
+//  --: https://developer.apple.com/documentation/foundation/urlsession/processing_url_session_data_task_results_with_combine
+//  --: https://medium.com/better-programming/testing-your-combine-publishers-8ccd6bd151b
 
 public struct DataProvider {
     
