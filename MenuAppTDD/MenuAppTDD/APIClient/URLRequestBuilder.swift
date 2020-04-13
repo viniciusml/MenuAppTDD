@@ -21,6 +21,8 @@ struct URLRequestComponent {
         "Content-Type": "application/json",
         "user-key": "d25a516a7a59fb465b3b1440a2c92621"
     ]
+    
+    static let categoriesEndpoint: Endpoint = "/categories"
 }
 
 public struct URLRequestBuilder: RequestBuilder {
