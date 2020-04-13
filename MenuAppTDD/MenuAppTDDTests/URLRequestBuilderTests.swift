@@ -35,6 +35,10 @@ class URLRequestBuilderTests: XCTestCase {
     
     // MARK: - Helpers
     
+    private func makeSUT() -> RequestBuilder {
+        return URLRequestBuilderStub()
+    }
+    
     private class URLRequestBuilderStub: RequestBuilder {
         
         var endpoints = [Endpoint]()

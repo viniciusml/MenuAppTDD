@@ -33,7 +33,7 @@ public struct URLRequestBuilder: RequestBuilder {
         self.headers = headers
     }
         
-    public func buildRequest(for endpoint: Endpoint = "/categories") -> URLRequest {
+    public func buildRequest(for endpoint: Endpoint) -> URLRequest {
         guard let url = URL(string: urlString + endpoint ) else {
             fatalError("Invalid URL")
         }
