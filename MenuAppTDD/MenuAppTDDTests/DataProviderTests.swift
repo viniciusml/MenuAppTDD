@@ -12,7 +12,7 @@ import Combine
 
 class DataProviderTests: XCTestCase {
     
-    typealias DataProviderResult = Result<Response, Error>
+    private typealias DataProviderResult = Result<Response, Error>
     
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
