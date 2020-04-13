@@ -11,11 +11,6 @@ import MenuAppTDD
 
 class URLRequestBuilderTests: XCTestCase {
     
-    func test_init_doesNotBuildRequest() {
-        let sut = URLRequestBuilderStub()
-        XCTAssertTrue(sut.endpoints.isEmpty)
-    }
-    
     func test_buildRequest_usesCorrectEndpoint() {
         let endpoint: Endpoint = "/exampleEndpoint"
         let sut = URLRequestBuilderStub()
