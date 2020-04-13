@@ -12,7 +12,7 @@ import MenuAppTDD
 class URLRequestBuilderTests: XCTestCase {
     
     func test_buildRequest_usesCorrectEndpoint() {
-        let endpoint: Endpoint = "/exampleEndpoint"
+        let endpoint = exampleEndpoint()
         let sut = makeSUT(urlStr: baseURL())
         
         let request = sut.buildRequest(for: endpoint)
@@ -22,7 +22,7 @@ class URLRequestBuilderTests: XCTestCase {
     
     func test_buildRequest_appendsEndpointToBaseURL() {
         let url = baseURL()
-        let endpoint: Endpoint = "/exampleEndpoint"
+        let endpoint = exampleEndpoint()
         let sut = makeSUT(urlStr: url)
         
         let request = sut.buildRequest(for: endpoint)
@@ -38,5 +38,9 @@ class URLRequestBuilderTests: XCTestCase {
     
     private func baseURL() -> String {
         return "https://base-url.com"
+    }
+    
+    private func exampleEndpoint() -> Endpoint {
+        return "/exampleEndpoint"
     }
 }
