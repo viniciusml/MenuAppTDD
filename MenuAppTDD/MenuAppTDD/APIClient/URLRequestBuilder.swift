@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RequestBuilder {
+struct URLRequestBuilder {
     
     private let baseURL = "https://developers.zomato.com/api/v2.1"
     
