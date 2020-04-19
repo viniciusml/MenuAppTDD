@@ -48,7 +48,7 @@ struct MenuMainView: View {
             }
                 //Change menu to arrow
                 .navigationBarItems(
-                    leading: NavigationItem("menu", color: .white),
+                    leading: MenuButton(color: .white),
                     trailing: NavigationItem("basket", color: .appNavItemColor))
         }
     }

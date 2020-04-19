@@ -8,26 +8,27 @@
 
 import SwiftUI
 
-struct MenuAnimation: View {
+fileprivate struct MenuButtonView: View {
 
     var body: some View {
-        ActivityIndicatorView()
+        MenuButton(color: .red)
             .frame(width: 20, height: 20, alignment: .center)
     }
 }
 
-public struct ActivityIndicatorView: View {
-
-    @State private var isAnimating: Bool = true
-
+public struct MenuButton: View {
+    
+    var color: UIColor
+    @State private var isAnimating: Bool = false
+    
     public var body: some View {
-        createMenu()
-            .onAppear {
-                self.isAnimating = false
-        }
-        .onDisappear {
-            self.isAnimating = false
-        }
+        Button(action: {
+            self.isAnimating.toggle()
+        }, label: {
+            createMenu()
+                .foregroundColor(Color(color))
+                .frame(width: 20, height: 20)
+        })
     }
 
     func createMenu() -> AnyView {
@@ -127,7 +128,7 @@ public struct ActivityIndicatorView: View {
 #if DEBUG
     struct MenuAnimation_Previews: PreviewProvider {
         static var previews: some View {
-            MenuAnimation()
+            MenuButtonView()
                 .previewLayout(.fixed(width: 100, height: 100))
         }
     }
