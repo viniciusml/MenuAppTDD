@@ -9,7 +9,7 @@
 import SwiftUI
 
 fileprivate struct MenuButtonView: View {
-
+    
     var body: some View {
         MenuButton(color: .red)
             .frame(width: 20, height: 20, alignment: .center)
@@ -27,42 +27,63 @@ public struct MenuButton: View {
         }, label: {
             createMenu()
                 .foregroundColor(Color(color))
-                .frame(width: 20, height: 20)
         })
     }
-
+    
     func createMenu() -> AnyView {
         let count = 4
         let indicator = GeometryReader { (geometry: GeometryProxy) in
             ForEach(0..<count) { index in
                 Group { () -> AnyView in
                     let availableHeight = geometry.size.height / CGFloat(count)
-                    let spacing = availableHeight / 3
+                    let spacing = availableHeight / CGFloat(count - 1)
                     let height = availableHeight - spacing
                     let width = geometry.size.width
-
+                    
                     let rect = RoundedRectangle(cornerRadius: 2)
                         .frame(width: width, height: height)
                     return AnyView(
                         rect
                             .offset(y: availableHeight * CGFloat(index))
-                            .offset(x: self.remove(index))
-                            .opacity(self.fade(index))
-                            .rotationEffect(self.rotate(index))
-                            .offset(x: self.offset(index, xValue: width / 4, yValue: spacing).x,
-                                    y: self.offset(index, xValue: width / 4, yValue: spacing).y)
+                            .animateMiddleRect(
+                                at: index,
+                                isAnimating: self.isAnimating,
+                                width: width,
+                                spacing: spacing)
+                            .animateMarginRect(at: index, isAnimating: self.isAnimating)
                             .animation(
                                 Animation.easeInOut
-                                    .delay(0.2)
-                            )
+                                    .delay(0.2))
+                        
                     )
                 }
             }
         }
         return AnyView(indicator)
     }
+}
+
+struct MiddleMenuRect: ViewModifier {
     
-    private func offset(_ rect: Int, xValue: CGFloat, yValue: CGFloat) -> (x: CGFloat, y: CGFloat) {
+    let isAnimating: Bool
+    let index: Int
+    let width: CGFloat
+    let spacing: CGFloat
+    
+    init(at index: Int, isAnimating: Bool, width: CGFloat, spacing: CGFloat) {
+        self.index = index
+        self.isAnimating = isAnimating
+        self.width = width
+        self.spacing = spacing
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .rotationEffect(rotate(index))
+            .offset(adjust(index, xValue: width / 4, yValue: spacing))
+    }
+    
+    private func adjust(_ rect: Int, xValue: CGFloat, yValue: CGFloat) -> CGSize {
         let condition = validateMiddle(rect)
         var offsetX: CGFloat = 0.0
         var offsetY: CGFloat = 0.0
@@ -77,13 +98,13 @@ public struct MenuButton: View {
         default: break
         }
         
-        return (offsetX, offsetY)
+        return CGSize(width: offsetX, height: offsetY)
     }
-
+    
     private func rotate(_ rect: Int) -> Angle {
         let condition = validateMiddle(rect)
         var degrees: Double = 0.0
-
+        
         switch rect {
         case 1:
             degrees = condition ? 45.0 : 0.0
@@ -93,7 +114,28 @@ public struct MenuButton: View {
         }
         return Angle(degrees: degrees)
     }
+    
+    private func validateMiddle(_ rect: Int) -> Bool {
+        (rect == 1 || rect == 2) && isAnimating
+    }
+}
 
+struct MarginMenuRect: ViewModifier {
+    
+    let isAnimating: Bool
+    let index: Int
+    
+    init(at index: Int, isAnimating: Bool) {
+        self.index = index
+        self.isAnimating = isAnimating
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .offset(x: remove(index))
+            .opacity(fade(index))
+    }
+    
     private func fade(_ rect: Int) -> Double {
         let condition = validateMargin(rect)
         switch rect {
@@ -104,7 +146,7 @@ public struct MenuButton: View {
         default: return 1
         }
     }
-
+    
     private func remove(_ rect: Int) -> CGFloat {
         let condition = validateMargin(rect)
         switch rect {
@@ -115,21 +157,33 @@ public struct MenuButton: View {
         default: return 0
         }
     }
-
+    
     private func validateMargin(_ rect: Int) -> Bool {
         (rect == 0 || rect == 3) && isAnimating
     }
+}
 
-    private func validateMiddle(_ rect: Int) -> Bool {
-        (rect == 1 || rect == 2) && isAnimating
+extension View {
+    func animateMarginRect(at index: Int, isAnimating: Bool) -> some View {
+        return self.modifier(
+            MarginMenuRect(at: index,
+                           isAnimating: isAnimating))
+    }
+    
+    func animateMiddleRect(at index: Int, isAnimating: Bool, width: CGFloat, spacing: CGFloat) -> some View {
+        return self.modifier(
+            MiddleMenuRect(at: index,
+                           isAnimating: isAnimating,
+                           width: width,
+                           spacing: spacing))
     }
 }
 
 #if DEBUG
-    struct MenuAnimation_Previews: PreviewProvider {
-        static var previews: some View {
-            MenuButtonView()
-                .previewLayout(.fixed(width: 100, height: 100))
-        }
+struct MenuAnimation_Previews: PreviewProvider {
+    static var previews: some View {
+        MenuButtonView()
+            .previewLayout(.fixed(width: 100, height: 100))
     }
+}
 #endif
