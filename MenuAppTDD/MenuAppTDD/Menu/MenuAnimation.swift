@@ -11,7 +11,7 @@ import SwiftUI
 fileprivate struct MenuButtonView: View {
     
     var body: some View {
-        MenuButton(color: .red)
+        MenuButton(color: .white)
             .frame(width: 20, height: 20, alignment: .center)
     }
 }
@@ -26,6 +26,7 @@ public struct MenuButton: View {
             self.isAnimating.toggle()
         }, label: {
             createMenu()
+                .frame(width: 20, height: 20, alignment: .center)
                 .foregroundColor(Color(color))
         })
     }
@@ -183,7 +184,8 @@ extension View {
 struct MenuAnimation_Previews: PreviewProvider {
     static var previews: some View {
         MenuButtonView()
-            .previewLayout(.fixed(width: 100, height: 100))
+            .frame(width: 100, height: 100, alignment: .center)
+            .background(Color(.appRed))
     }
 }
 #endif
