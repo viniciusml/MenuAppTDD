@@ -48,6 +48,16 @@
                ReferencedContainer = "container:MenuAppTDD.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8F89A9392466F38C008BD0B5"
+               BuildableName = "MenuAppTDDAPIEndToEndTests.xctest"
+               BlueprintName = "MenuAppTDDAPIEndToEndTests"
+               ReferencedContainer = "container:MenuAppTDD.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
