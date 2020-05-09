@@ -13,6 +13,18 @@ import Combine
 class MenuAppTDDAPIEndToEndTests: XCTestCase {
 
     func test_endToEndServerGETCategories_matchesFixedTestData() {
+        let categories = getCategories()?.categories
+
+        XCTAssertEqual(categories?.count, 13)
+
+        categories?.enumerated().forEach { (index, item) in
+            XCTAssertEqual(item.categories, expectedCategory(at: index))
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func getCategories() -> Response? {
         let requestBuilder = URLRequestBuilder(urlString: URLRequestConstant.baseURL,
                                                headers: URLRequestConstant.defaultHeaders)
         let request = requestBuilder.buildRequest(for: URLRequestConstant.categoriesEndpoint)
@@ -40,14 +52,8 @@ class MenuAppTDDAPIEndToEndTests: XCTestCase {
         wait(for: [exp], timeout: 5.0)
         XCTAssertNotNil(sub)
 
-        XCTAssertEqual(receivedResult?.categories.count, 13)
-
-        receivedResult?.categories.enumerated().forEach { (index, item) in
-            XCTAssertEqual(item.categories, expectedCategory(at: index))
-        }
+        return receivedResult
     }
-
-    // MARK: - Helpers
 
     private func expectedCategory(at index: Int) -> Categories {
         Categories(id: id(at: index), name: name(at: index))
