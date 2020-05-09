@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Response
 public struct Response: Codable, Equatable {
-    let categories: [Category]
+    public let categories: [Category]
     
     public init(categories: [Category]) {
         self.categories = categories
@@ -19,7 +19,7 @@ public struct Response: Codable, Equatable {
 
 // MARK: - Category
 public struct Category: Codable, Equatable {
-    let categories: Categories
+    public let categories: Categories
     
     public init(categories: Categories) {
         self.categories = categories
@@ -28,8 +28,8 @@ public struct Category: Codable, Equatable {
 
 // MARK: - Categories
 public struct Categories: Codable, Equatable {
-    let id: Int
-    let name: String
+    public let id: Int
+    public let name: String
     
     public init(id: Int, name: String) {
         self.id = id
