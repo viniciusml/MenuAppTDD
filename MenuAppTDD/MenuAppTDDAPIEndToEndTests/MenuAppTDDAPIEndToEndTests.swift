@@ -24,13 +24,15 @@ class MenuAppTDDAPIEndToEndTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func getCategories() -> Response? {
+    private func getCategories(file: StaticString = #file, line: UInt = #line) -> Response? {
         let requestBuilder = URLRequestBuilder(urlString: URLRequestConstant.baseURL,
                                                headers: URLRequestConstant.defaultHeaders)
         let request = requestBuilder.buildRequest(for: URLRequestConstant.categoriesEndpoint)
 
         let client = URLSessionHTTPClient()
         let dataProvider = DataProvider(request: request, client: client)
+
+        trackForMemoryLeaks(client, file: file, line: line)
 
         let exp = expectation(description: "Wait for load completion")
 
