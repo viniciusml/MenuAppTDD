@@ -1,0 +1,6 @@
+framework module Pods_MenuAppTDDTests {
+  umbrella header "Pods-MenuAppTDDTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
