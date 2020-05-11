@@ -52,6 +52,16 @@
                ReferencedContainer = "container:MenuAppTDD.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8F89A9392466F38C008BD0B5"
+               BuildableName = "MenuAppTDDAPIEndToEndTests.xctest"
+               BlueprintName = "MenuAppTDDAPIEndToEndTests"
+               ReferencedContainer = "container:MenuAppTDD.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -71,6 +81,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8F863518239430A2008EA802"
+            BuildableName = "MenuAppTDDTests.xctest"
+            BlueprintName = "MenuAppTDDTests"
+            ReferencedContainer = "container:MenuAppTDD.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
