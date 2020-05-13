@@ -41,9 +41,12 @@ class MenuAppTDDAPIEndToEndTests: XCTestCase {
         let publisher = dataProvider.load()
 
         sub = publisher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
-                exp.fulfill()
+
+                if case let .failure(error) = completion {
+                    XCTFail("Expected success, received \(error) instead")
+                }
             }, receiveValue: { [weak self] value in
                 guard self != nil else { return }
 
