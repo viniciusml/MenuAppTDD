@@ -191,6 +191,8 @@
 				8F4CA3F22474808300C4C9A3 /* URLSessionHTTPClientTests+Helpers.swift */,
 				8F4CA3F6247481C100C4C9A3 /* DataProviderTests+Helpers.swift */,
 				8F4CA3FA2474833F00C4C9A3 /* URLRequestBuilderTests+Helpers.swift */,
+				8FB6E9572441F2D3000C4C89 /* XCTestCase+MemoryLeakTracking.swift */,
+				8FB6E963244471C2000C4C89 /* XCTestCase+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -245,8 +247,6 @@
 				8F4CA3F4247480D500C4C9A3 /* URLProtocolStub.swift */,
 				8FB6E95F24437EAF000C4C89 /* DataProviderTests.swift */,
 				8FB6E965244476FA000C4C89 /* URLRequestBuilderTests.swift */,
-				8FB6E9572441F2D3000C4C89 /* XCTestCase+MemoryLeakTracking.swift */,
-				8FB6E963244471C2000C4C89 /* XCTestCase+TestHelpers.swift */,
 				8F4CA3F82474820700C4C9A3 /* HTTPClientStub.swift */,
 			);
 			path = MenuAppTDDTests;
