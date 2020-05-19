@@ -10,7 +10,7 @@ import Combine
 import Foundation
 import MenuAppTDD
 
-class HTTPClientSpy: DataTaskPublisher {
+class HTTPClientStub: DataTaskPublisher {
 
     private var requests = [URLRequest]()
 
