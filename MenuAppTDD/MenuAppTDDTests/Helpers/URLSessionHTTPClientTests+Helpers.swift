@@ -19,13 +19,10 @@ extension URLSessionHTTPClientTests {
     }
 
     func publishErrorFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> Error? {
-        let publisher = publisherFor(data: data, response: response, error: error, file: file, line: line)
-
-        var sub: Cancellable? = nil
         let exp = XCTestExpectation(description: "wait for completion")
         var receivedError: URLError?
 
-        sub = publisher
+        publisherFor(data: data, response: response, error: error, file: file, line: line)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -37,21 +34,18 @@ extension URLSessionHTTPClientTests {
             }, receiveValue: { response in
                 XCTFail("Expected error, received \(response) instead", file: file, line: line)
             })
+            .store(in: &cancellables)
 
         wait(for: [exp], timeout: 1.0)
-        assertNotNil(sub, file: file, line: line)
+
         return receivedError
     }
 
     func publishValuesFor(data: Data?, response: URLResponse?, error: Error?, file: StaticString = #file, line: UInt = #line) -> (data: Data, response: URLResponse)? {
-        let publisher = publisherFor(data: data, response: response, error: error, file: file, line: line)
-
-        var sub: Cancellable? = nil
         let exp = XCTestExpectation(description: "wait for completion")
         var receivedValue: (data: Data, response: URLResponse)?
 
-        sub = publisher
-            .sink(receiveCompletion: { completion in
+        publisherFor(data: data, response: response, error: error, file: file, line: line)            .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     exp.fulfill()
@@ -61,9 +55,10 @@ extension URLSessionHTTPClientTests {
             }, receiveValue: { (data, response) in
                 receivedValue = (data: data, response: response)
             })
+            .store(in: &cancellables)
 
         wait(for: [exp], timeout: 1.0)
-        assertNotNil(sub, file: file, line: line)
+
         return receivedValue
     }
 
@@ -72,10 +67,6 @@ extension URLSessionHTTPClientTests {
         let sut = makeSUT(file: file, line: line)
 
         return sut.createPublisher(from: anyURLRequest())
-    }
-
-    func assertNotNil(_ sub: Cancellable?, file: StaticString = #file, line: UInt = #line) {
-        XCTAssertNotNil(sub, file: file, line: line)
     }
 
     func anyNSError() -> NSError {

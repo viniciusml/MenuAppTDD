@@ -22,10 +22,7 @@ extension DataProviderTests {
     func expect(_ sut: DataProvider, toCompleteWith expectedResult: DataProviderResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "wait for load completion")
 
-        var sub: Cancellable? = nil
-        let publisher = sut.load()
-
-        sub = publisher
+        sut.load()
             .mapError { $0 as NSError }
             .sink(receiveCompletion: { completion in
 
@@ -48,11 +45,11 @@ extension DataProviderTests {
                 }
                 exp.fulfill()
             })
+            .store(in: &cancellables)
 
         action()
 
         wait(for: [exp], timeout: 1.0)
-        XCTAssertNotNil(sub)
     }
 
     func failure(_ error: DataProvider.NetworkError) -> DataProviderResult {

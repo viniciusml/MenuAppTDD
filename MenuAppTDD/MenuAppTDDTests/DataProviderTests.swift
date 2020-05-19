@@ -13,6 +13,8 @@ import Combine
 class DataProviderTests: XCTestCase {
     
     typealias DataProviderResult = Result<Response, Error>
+
+    var cancellables = Set<AnyCancellable>()
     
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()

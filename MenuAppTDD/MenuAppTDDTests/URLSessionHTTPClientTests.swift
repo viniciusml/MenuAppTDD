@@ -11,7 +11,9 @@ import MenuAppTDD
 import Combine
 
 class URLSessionHTTPClientTests: XCTestCase {
-    
+
+    var cancellables = Set<AnyCancellable>()
+
     override func setUp() {
         super.setUp()
         
@@ -22,16 +24,16 @@ class URLSessionHTTPClientTests: XCTestCase {
         super.tearDown()
         
         URLProtocolStub.stopInterceptingRequests()
+        cancellables = []
     }
     
     func test_getFromURL_performsGETRequestWithURL() {
         let request = anyURLRequest()
         let exp = expectation(description: "Wait for request")
 
-        var sub: Cancellable?
-        let publisher = makeSUT().createPublisher(from: request)
-        sub = publisher
+        makeSUT().createPublisher(from: request)
             .sink(receiveCompletion: { _ in }, receiveValue: { _, _ in })
+            .store(in: &cancellables)
         
         URLProtocolStub.observeRequests { request in
             XCTAssertEqual(request.url, request.url)
@@ -40,7 +42,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
 
         wait(for: [exp], timeout: 1.0)
-        assertNotNil(sub)
     }
     
     func test_getFromURL_failsOnRequestError() {
