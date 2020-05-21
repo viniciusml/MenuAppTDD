@@ -15,6 +15,8 @@ class DataProviderTests: XCTestCase {
     typealias DataProviderResult = Result<Response, Error>
 
     var cancellables = Set<AnyCancellable>()
+
+    let url = URL(string: "http://any-url.com")!
     
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
@@ -23,7 +25,6 @@ class DataProviderTests: XCTestCase {
     }
     
     func test_load_requestsDataFromURL() {
-        let url = URL(string: "http://any-url.com")!
         let (sut, client) = makeSUT(url: anyURL())
 
         _ = sut.load()
@@ -32,7 +33,6 @@ class DataProviderTests: XCTestCase {
     }
 
     func test_loadTwice_requestsDataFromURLTwice() {
-        let url = URL(string: "http://any-url.com")!
         let (sut, client) = makeSUT(url: anyURL())
 
         _ = sut.load()
