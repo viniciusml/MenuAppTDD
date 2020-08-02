@@ -13,6 +13,11 @@
 		8F3AA981239C4811007DF782 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3AA980239C4811007DF782 /* Extensions.swift */; };
 		8F3AA983239C481C007DF782 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3AA982239C481C007DF782 /* Constants.swift */; };
 		8F3AA992239C5EAD007DF782 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F3AA991239C5EAD007DF782 /* LaunchScreen.storyboard */; };
+		8F4CA3F32474808300C4C9A3 /* URLSessionHTTPClientTests+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CA3F22474808300C4C9A3 /* URLSessionHTTPClientTests+Helpers.swift */; };
+		8F4CA3F5247480D500C4C9A3 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CA3F4247480D500C4C9A3 /* URLProtocolStub.swift */; };
+		8F4CA3F7247481C100C4C9A3 /* DataProviderTests+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CA3F6247481C100C4C9A3 /* DataProviderTests+Helpers.swift */; };
+		8F4CA3F92474820700C4C9A3 /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CA3F82474820700C4C9A3 /* HTTPClientStub.swift */; };
+		8F4CA3FB2474833F00C4C9A3 /* URLRequestBuilderTests+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4CA3FA2474833F00C4C9A3 /* URLRequestBuilderTests+Helpers.swift */; };
 		8F52680D23DA334400F182BB /* Ultra-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F52680C23DA334400F182BB /* Ultra-Regular.ttf */; };
 		8F52680F23DA36F100F182BB /* NavigationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F52680E23DA36F100F182BB /* NavigationItemView.swift */; };
 		8F64E1AF23CD10F60063881F /* CategoryMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F64E1AE23CD10F60063881F /* CategoryMainView.swift */; };
@@ -68,6 +73,11 @@
 		8F3AA980239C4811007DF782 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8F3AA982239C481C007DF782 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8F3AA991239C5EAD007DF782 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8F4CA3F22474808300C4C9A3 /* URLSessionHTTPClientTests+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionHTTPClientTests+Helpers.swift"; sourceTree = "<group>"; };
+		8F4CA3F4247480D500C4C9A3 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		8F4CA3F6247481C100C4C9A3 /* DataProviderTests+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataProviderTests+Helpers.swift"; sourceTree = "<group>"; };
+		8F4CA3F82474820700C4C9A3 /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
+		8F4CA3FA2474833F00C4C9A3 /* URLRequestBuilderTests+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestBuilderTests+Helpers.swift"; sourceTree = "<group>"; };
 		8F52680C23DA334400F182BB /* Ultra-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Ultra-Regular.ttf"; path = "MenuAppTDD/Ultra-Regular.ttf"; sourceTree = "<group>"; };
 		8F52680E23DA36F100F182BB /* NavigationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItemView.swift; sourceTree = "<group>"; };
 		8F64E1AE23CD10F60063881F /* CategoryMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryMainView.swift; sourceTree = "<group>"; };
@@ -158,7 +168,6 @@
 				8B6ED2E6ABFB001B9BDAE5B2 /* Pods-MenuAppTDDTests.debug.xcconfig */,
 				49780ABF2218137969862B99 /* Pods-MenuAppTDDTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -191,6 +200,18 @@
 				8F3AA980239C4811007DF782 /* Extensions.swift */,
 				8F3AA982239C481C007DF782 /* Constants.swift */,
 				8F52680E23DA36F100F182BB /* NavigationItemView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8F4CA3F12474805B00C4C9A3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8F4CA3F22474808300C4C9A3 /* URLSessionHTTPClientTests+Helpers.swift */,
+				8F4CA3F6247481C100C4C9A3 /* DataProviderTests+Helpers.swift */,
+				8F4CA3FA2474833F00C4C9A3 /* URLRequestBuilderTests+Helpers.swift */,
+				8FB6E9572441F2D3000C4C89 /* XCTestCase+MemoryLeakTracking.swift */,
+				8FB6E963244471C2000C4C89 /* XCTestCase+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -241,9 +262,12 @@
 		8F86351C239430A2008EA802 /* MenuAppTDDTests */ = {
 			isa = PBXGroup;
 			children = (
+				8F4CA3F12474805B00C4C9A3 /* Helpers */,
 				8F86351F239430A2008EA802 /* Info.plist */,
 				8F8330712429499700F4A1BC /* URLSessionHTTPClientTests.swift */,
+				8F4CA3F4247480D500C4C9A3 /* URLProtocolStub.swift */,
 				8FB6E95F24437EAF000C4C89 /* DataProviderTests.swift */,
+				8F4CA3F82474820700C4C9A3 /* HTTPClientStub.swift */,
 				8FB6E965244476FA000C4C89 /* URLRequestBuilderTests.swift */,
 				8FB6E9572441F2D3000C4C89 /* XCTestCase+MemoryLeakTracking.swift */,
 				8FB6E963244471C2000C4C89 /* XCTestCase+TestHelpers.swift */,
@@ -543,9 +567,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4CA3F7247481C100C4C9A3 /* DataProviderTests+Helpers.swift in Sources */,
 				8FB6E964244471C2000C4C89 /* XCTestCase+TestHelpers.swift in Sources */,
+				8F4CA3F5247480D500C4C9A3 /* URLProtocolStub.swift in Sources */,
+				8F4CA3F92474820700C4C9A3 /* HTTPClientStub.swift in Sources */,
 				8FB6E9582441F2D4000C4C89 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				8FB6E966244476FA000C4C89 /* URLRequestBuilderTests.swift in Sources */,
+				8F4CA3F32474808300C4C9A3 /* URLSessionHTTPClientTests+Helpers.swift in Sources */,
+				8F4CA3FB2474833F00C4C9A3 /* URLRequestBuilderTests+Helpers.swift in Sources */,
 				8F8330722429499700F4A1BC /* URLSessionHTTPClientTests.swift in Sources */,
 				8FB6E96024437EAF000C4C89 /* DataProviderTests.swift in Sources */,
 			);

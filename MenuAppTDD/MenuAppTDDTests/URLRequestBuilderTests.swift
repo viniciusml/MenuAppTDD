@@ -47,22 +47,4 @@ class URLRequestBuilderTests: XCTestCase {
         
         XCTAssertEqual(request.httpMethod, "POST")
     }
-    
-    // MARK: - Helpers
-    
-    private func makeSUT(urlStr: String, headers: [String: String] = [:]) -> URLRequestBuilder {
-        return URLRequestBuilder(urlString: urlStr, headers: headers)
-    }
-    
-    private func baseURL() -> String {
-        return "https://base-url.com"
-    }
-    
-    private func exampleEndpoint() -> Endpoint {
-        return "/exampleEndpoint"
-    }
-    
-    private func defaultHeaders() -> [String: String] {
-        return ["Test": "Header"]
-    }
 }
