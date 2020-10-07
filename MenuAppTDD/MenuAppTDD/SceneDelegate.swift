@@ -16,7 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UIHostingController(rootView: CategoryMainView())
+        window?.rootViewController = UIHostingController(rootView: ContentView())
         window?.makeKeyAndVisible()
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        Text("MenuApp")
     }
 }
