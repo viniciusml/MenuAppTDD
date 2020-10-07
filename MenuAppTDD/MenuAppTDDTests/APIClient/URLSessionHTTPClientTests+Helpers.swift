@@ -45,7 +45,8 @@ extension URLSessionHTTPClientTests {
         let exp = XCTestExpectation(description: "wait for completion")
         var receivedValue: (data: Data, response: URLResponse)?
 
-        publisherFor(data: data, response: response, error: error, file: file, line: line)            .sink(receiveCompletion: { completion in
+        publisherFor(data: data, response: response, error: error, file: file, line: line)
+            .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     exp.fulfill()

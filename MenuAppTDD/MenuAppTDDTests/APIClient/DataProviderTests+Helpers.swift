@@ -53,7 +53,7 @@ extension DataProviderTests {
     }
 
     func failure(_ error: DataProvider.NetworkError) -> DataProviderResult {
-        return .failure(error)
+        .failure(error)
     }
 
     func makeResponse() -> (model: Response, json: [String: Any]) {
@@ -75,11 +75,10 @@ extension DataProviderTests {
     }
 
     func makeItemsJSON(_ items: [[String: Any]]) -> Data {
-        let json = ["categories": items]
-        return try! JSONSerialization.data(withJSONObject: json)
+        try! JSONSerialization.data(withJSONObject: ["categories": items])
     }
 
     func anyURLError() -> URLError {
-        return URLError(.unknown)
+        URLError(.unknown)
     }
 }

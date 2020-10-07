@@ -12,18 +12,18 @@ import MenuAppTDD
 extension URLRequestBuilderTests {
 
     func makeSUT(urlStr: String, headers: [String: String] = [:]) -> URLRequestBuilder {
-        return URLRequestBuilder(urlString: urlStr, headers: headers)
+        URLRequestBuilder(urlString: urlStr, headers: headers)
     }
 
     func baseURL() -> String {
-        return "https://base-url.com"
+        "https://base-url.com"
     }
 
     func exampleEndpoint() -> Endpoint {
-        return "/exampleEndpoint"
+        "/exampleEndpoint"
     }
 
     func defaultHeaders() -> [String: String] {
-        return ["Test": "Header"]
+        ["Test": "Header"]
     }
 }

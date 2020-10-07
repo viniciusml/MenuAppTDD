@@ -14,7 +14,7 @@ extension XCTestCase {
     }
 
     func anyURLRequest() -> URLRequest {
-        return URLRequest(url: anyURL())
+        URLRequest(url: anyURL())
     }
 
     func anyData() -> Data {
@@ -22,6 +22,6 @@ extension XCTestCase {
     }
 
     func anyURL() -> URL {
-        return URL(string: "http://any-url.com")!
+        URL(string: "http://any-url.com")!
     }
 }
