@@ -26,35 +26,27 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8F8635022394309F008EA802"
+            BuildableName = "MenuAppTDD.app"
+            BlueprintName = "MenuAppTDD"
+            ReferencedContainer = "container:MenuAppTDD.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8F863518239430A2008EA802"
                BuildableName = "MenuAppTDDTests.xctest"
                BlueprintName = "MenuAppTDDTests"
-               ReferencedContainer = "container:MenuAppTDD.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8F863523239430A2008EA802"
-               BuildableName = "MenuAppTDDUITests.xctest"
-               BlueprintName = "MenuAppTDDUITests"
-               ReferencedContainer = "container:MenuAppTDD.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8F89A9392466F38C008BD0B5"
-               BuildableName = "MenuAppTDDAPIEndToEndTests.xctest"
-               BlueprintName = "MenuAppTDDAPIEndToEndTests"
                ReferencedContainer = "container:MenuAppTDD.xcodeproj">
             </BuildableReference>
          </TestableReference>
