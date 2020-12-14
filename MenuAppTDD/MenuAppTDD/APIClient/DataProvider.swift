@@ -22,7 +22,8 @@ import Combine
  3 - After the subscription has been aknowledged, the subscriber requests N values with request(_: Demand).
  4 - The publisher may then send N values with receive(_: Input). A publisher should never send more than the demand requested.
  5 - Also after the subscription has been aknowledged, the subscriber can send a cancellation with cancel().
- 6 - A publisher may optionally send completion with receive(completion). A completion can either be a normal termination, or may be a .failure completion, optionally propagating an error type.
+ 6 - A publisher may optionally send completion with receive(completion).
+     A completion can either be a normal termination, or may be a .failure completion, optionally propagating an error type.
  */
 
 //References:

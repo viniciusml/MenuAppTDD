@@ -16,7 +16,7 @@ public class URLSessionHTTPClient: DataTaskPublisher {
     }
     
     public func createPublisher(from request: URLRequest) -> URLRequestPublisher {
-        return session.dataTaskPublisher(for: request)
+        session.dataTaskPublisher(for: request)
             .eraseToAnyPublisher()
     }
 }

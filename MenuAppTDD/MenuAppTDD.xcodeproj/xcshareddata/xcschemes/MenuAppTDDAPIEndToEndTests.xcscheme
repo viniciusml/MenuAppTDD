@@ -5,22 +5,6 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8F8635022394309F008EA802"
-               BuildableName = "MenuAppTDD.app"
-               BlueprintName = "MenuAppTDD"
-               ReferencedContainer = "container:MenuAppTDD.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -44,9 +28,9 @@
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8F863518239430A2008EA802"
-               BuildableName = "MenuAppTDDTests.xctest"
-               BlueprintName = "MenuAppTDDTests"
+               BlueprintIdentifier = "8F89A9392466F38C008BD0B5"
+               BuildableName = "MenuAppTDDAPIEndToEndTests.xctest"
+               BlueprintName = "MenuAppTDDAPIEndToEndTests"
                ReferencedContainer = "container:MenuAppTDD.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -62,16 +46,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8F8635022394309F008EA802"
-            BuildableName = "MenuAppTDD.app"
-            BlueprintName = "MenuAppTDD"
-            ReferencedContainer = "container:MenuAppTDD.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -79,16 +53,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8F8635022394309F008EA802"
-            BuildableName = "MenuAppTDD.app"
-            BlueprintName = "MenuAppTDD"
-            ReferencedContainer = "container:MenuAppTDD.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
